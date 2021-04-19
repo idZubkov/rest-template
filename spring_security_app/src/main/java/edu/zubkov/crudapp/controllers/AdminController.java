@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
+@RequestMapping("/")
 public class AdminController {
 
     private final RoleService roleService;
