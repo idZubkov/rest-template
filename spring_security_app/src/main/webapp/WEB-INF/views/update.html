@@ -8,7 +8,7 @@
 <body>
 <div align="center">
     <h1>Edit user</h1>
-    <form action="#" th:action="@{/update/{id}(id = ${user.id})}" th:object="${user}" method="post">
+    <form action="#" th:action="@{/admin}" th:object="${user}" method="post">
         <table border="0" cellpadding="5">
             <tr>
                 <td>Name</td>
@@ -24,19 +24,23 @@
                 <td>Profession</td>
                 <td><input type="text" th:field="*{profession}"/></td>
             </tr>
+
+            <tr>
+                <td>Roles</td>
+                <td>
+                    <input type="checkbox" name="authorities"
+                           th:each="role : ${roles}"
+                           th:text="${role.name}"
+                           th:value="${role.id}"
+                    />
+                </td>
+            </tr>
+
             <tr>
                 <td>
                     <button type="submit">Save edits</button>
                 </td>
             </tr>
-            <label>Roles:
-                <input type="checkbox" name="authorities"
-                       th:each="role : ${allRoles}"
-                       th:text="${role.name}"
-                       th:value="${role.id}"
-                       th:checked="${user.roles.contains(role)}"
-                />
-            </label>
         </table>
     </form>
 </div>

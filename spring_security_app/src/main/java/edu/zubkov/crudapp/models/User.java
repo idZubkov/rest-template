@@ -14,6 +14,14 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
+    public User(String name, String surname, String profession, String username, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.profession = profession;
+        this.username = username;
+        this.password = password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")

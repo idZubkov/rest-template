@@ -61,13 +61,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user").access("hasAnyRole('ADMIN', 'USER')")
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 // защищенные URL
-                .antMatchers("/hello").access("hasAnyRole('ADMIN')");
+                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
     }
 
-    @Bean
+        @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+
+        return new BCryptPasswordEncoder(12 );
     }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return NoOpPasswordEncoder.getInstance();
+//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
