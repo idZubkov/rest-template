@@ -7,7 +7,6 @@ import edu.zubkov.crudapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping()
+    @GetMapping
     public String allUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "admin";
@@ -42,8 +41,8 @@ public class AdminController {
     }
 
     @PatchMapping("/update/{id}")
-    public String editUser(@Validated(User.class) @ModelAttribute("user") User user,
-                           @RequestParam("authorities") List<String> listOfStrings) {
+    public String editUser(@ModelAttribute("user") User user,
+                           @RequestParam(value = "authorities", required = false) List<String> listOfStrings) {
         Set<Role> roleSet = userService.getAllRoles(listOfStrings);
         user.setRoles(roleSet);
         userService.update(user);
@@ -58,9 +57,9 @@ public class AdminController {
         return "create";
     }
 
-    @PostMapping
-    public String create(@Validated(User.class) @ModelAttribute("user") User user,
-                         @RequestParam("authorities") List<String> listOfStrings) {
+    @PostMapping("/admin")
+    public String create(@ModelAttribute("user") User user,
+                         @RequestParam(value = "authorities", required = false) List<String> listOfStrings) {
         Set<Role> setOfRoles = userService.getAllRoles(listOfStrings);
         user.setRoles(setOfRoles);
         userService.add(user);

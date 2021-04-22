@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Autowired
+//    @Autowired
     @Override
     public void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());

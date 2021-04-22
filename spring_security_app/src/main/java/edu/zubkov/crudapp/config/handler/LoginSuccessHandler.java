@@ -20,16 +20,16 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //        httpServletResponse.sendRedirect("/hello");
         boolean isAdmin = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .anyMatch((a) -> a.equals("ROLE_ADMIN"));
+                .anyMatch((a) -> a.equals("ADMIN"));
         boolean isUser = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .anyMatch((a) -> a.equals("ROLE_USER"));
+                .anyMatch((a) -> a.equals("USER"));
         if (isAdmin) {
-            httpServletResponse.sendRedirect("admin");
+            httpServletResponse.sendRedirect("/admin");
         } else if (isUser) {
-            httpServletResponse.sendRedirect("user");
+            httpServletResponse.sendRedirect("/user");
         } else {
-            httpServletResponse.sendRedirect("login");
+            httpServletResponse.sendRedirect("/login");
         }
     }
 }
