@@ -55,13 +55,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 // делаем страницу регистрации недоступной для авторизированных пользователей
+                .csrf().disable()
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
-                .antMatchers("/user").access("hasAnyRole('ADMIN', 'USER')")
-                .antMatchers("/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 // защищенные URL
-                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+//                .antMatchers("/hello").access("hasAnyRole('ROLE_ADMIN')")
+                .anyRequest()
+                .authenticated();
     }
 
 //    @Bean
