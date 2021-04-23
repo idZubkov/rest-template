@@ -24,7 +24,7 @@ import java.util.Properties;
 @ComponentScan(value = "edu.zubkov.crudapp")
 public class JpaConfig {
 
-//    @Resource
+    //    @Resource
     private final Environment environment;
 
     @Autowired

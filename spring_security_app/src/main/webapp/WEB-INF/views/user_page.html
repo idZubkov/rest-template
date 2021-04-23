@@ -3,21 +3,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>User page</title>
 </head>
 <body>
-<table>
-    <thead>
+<table border="1">
     <tr>
-        <th>id</th>
-        <th>name</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Profession</th>
+    </tr>
 
-    </tr>
-    </thead>
-    <tbody>
-    <td>
+    <tr>
         <td th:utext="${user.id}"></td>
+        <td th:utext="${user.name}"></td>
+        <td th:utext="${user.surname}"></td>
         <td th:utext="${user.username}"></td>
+        <td th:utext="${user.profession}"></td>
     </tr>
-    </tbody>
 </table>
+<a th:href="@{/logout}">Logout</a>
+</body>
+</html>
