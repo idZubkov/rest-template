@@ -5,7 +5,9 @@ import edu.zubkov.crudapp.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -21,5 +23,14 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role roleById(long id) {
         return roleDAO.roleById(id);
+    }
+
+    @Override
+    public Set<Role> getAllRoles(List<String> idOfRoles) {
+        Set<Role> setOfRoles = new HashSet<>();
+        for (String id : idOfRoles) {
+            setOfRoles.add(roleDAO.roleById(Long.parseLong(id)));
+        }
+        return setOfRoles;
     }
 }

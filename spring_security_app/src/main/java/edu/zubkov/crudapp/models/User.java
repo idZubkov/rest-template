@@ -22,6 +22,9 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public User() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "increment", strategy = "increment")
@@ -36,10 +39,10 @@ public class User implements UserDetails {
     @Column(name = "profession")
     private String profession;
 
-    @Column(name = "login", nullable = false, unique = true)
+    @Column(name = "login")
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -53,9 +56,6 @@ public class User implements UserDetails {
         this.name = name;
         this.surname = surname;
         this.profession = profession;
-    }
-
-    public User() {
     }
 
     public long getId() {

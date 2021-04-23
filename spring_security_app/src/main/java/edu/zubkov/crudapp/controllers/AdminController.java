@@ -7,6 +7,7 @@ import edu.zubkov.crudapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,10 +41,10 @@ public class AdminController {
         return "update";
     }
 
-    @PatchMapping("/update/{id}")
-    public String editUser(@ModelAttribute("user") User user,
+    @PostMapping("/edit")
+    public String editUser(@Validated(User.class) @ModelAttribute("user") User user,
                            @RequestParam(value = "authorities", required = false) List<String> listOfStrings) {
-        Set<Role> roleSet = userService.getAllRoles(listOfStrings);
+        Set<Role> roleSet = roleService.getAllRoles(listOfStrings);
         user.setRoles(roleSet);
         userService.update(user);
         return "redirect:/admin";
@@ -57,10 +58,10 @@ public class AdminController {
         return "create";
     }
 
-    @PostMapping("/admin")
-    public String create(@ModelAttribute("user") User user,
-                         @RequestParam(value = "authorities", required = false) List<String> listOfStrings) {
-        Set<Role> setOfRoles = userService.getAllRoles(listOfStrings);
+    @PostMapping("/createNewUser")
+    public String create(@Validated(User.class) @ModelAttribute("user") User user,
+                         @RequestParam("authorities") List<String> listOfStrings) {
+        Set<Role> setOfRoles = roleService.getAllRoles(listOfStrings);
         user.setRoles(setOfRoles);
         userService.add(user);
         return "redirect:/admin";

@@ -2,7 +2,6 @@ package edu.zubkov.crudapp.services;
 
 import edu.zubkov.crudapp.dao.RoleDAO;
 import edu.zubkov.crudapp.dao.UserDAO;
-import edu.zubkov.crudapp.models.Role;
 import edu.zubkov.crudapp.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,9 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -36,6 +33,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public void add(User user) {
         User newUser = new User();
+        newUser.setName(user.getName());
+        newUser.setSurname(user.getSurname());
+        newUser.setProfession(user.getProfession());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setRoles(user.getRoles());
@@ -65,15 +65,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();
-    }
-
-    @Override
-    public Set<Role> getAllRoles(List<String> idOfRoles) {
-        Set<Role> setOfRoles = new HashSet<>();
-        for (String id : idOfRoles) {
-            setOfRoles.add(roleDAO.roleById(Long.parseLong(id)));
-        }
-        return setOfRoles;
     }
 
     @Override
