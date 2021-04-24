@@ -41,12 +41,13 @@ public class AdminController {
         return "update";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit/{id}")
     public String editUser(@Validated(User.class) @ModelAttribute("user") User user,
-                           @RequestParam(value = "authorities", required = false) List<String> listOfStrings) {
+                           @RequestParam(value = "authorities", required = false) List<String> listOfStrings,
+                           @PathVariable("id") long id) {
         Set<Role> roleSet = roleService.getAllRoles(listOfStrings);
         user.setRoles(roleSet);
-        userService.update(user);
+        userService.update(user, id);
         return "redirect:/admin";
     }
 

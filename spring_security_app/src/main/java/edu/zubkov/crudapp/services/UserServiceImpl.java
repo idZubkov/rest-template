@@ -51,7 +51,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public void update(User user) {
+    public void update(User user, long id) {
+        User userToUpdate = getById(id);
+        userToUpdate.setName(user.getName());
+        userToUpdate.setSurname(user.getSurname());
+        userToUpdate.setProfession(user.getProfession());
+        userToUpdate.setPassword(user.getPassword());
         userDAO.update(user);
     }
 
