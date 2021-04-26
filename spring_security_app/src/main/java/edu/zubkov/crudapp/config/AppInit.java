@@ -1,5 +1,6 @@
 package edu.zubkov.crudapp.config;
 
+import edu.zubkov.crudapp.config.security.SecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {

@@ -1,4 +1,4 @@
-package edu.zubkov.crudapp.config;
+package edu.zubkov.crudapp.config.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
