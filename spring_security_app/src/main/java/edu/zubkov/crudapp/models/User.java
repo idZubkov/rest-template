@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @Column(name = "profession")
     private String profession;
 
-    @Column(name = "login")
+    @Column(name = "username")
     private String username;
 
     @Column(name = "password")
